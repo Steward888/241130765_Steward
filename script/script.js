@@ -41,10 +41,8 @@ document.querySelectorAll('.card-produk').forEach(card => {
 
 
 const inputKodePromo = document.querySelector('#kodePromo');
-
 inputKodePromo.addEventListener('input', () => {
-
-    inputKodePromo.value = inputKodePromo.value.toUpperCase().replace(/\s+/g, '');
+    inputKodePromo.value = inputKodePromo.value.toUpperCase().replace(/\s+/g,'');
 });
 
 
