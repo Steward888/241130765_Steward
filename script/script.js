@@ -1,39 +1,57 @@
+
 document.querySelectorAll('.card-produk').forEach(card => {
     const input = card.querySelector('.quantity input');
     const minus = card.querySelector('.minus');
     const plus = card.querySelector('.plus');
-    const harga = card.querySelector('.price');
-    const nominalHargaAwal = parseInt(harga.textContent.match(/\d+/)[0]);
 
     plus.addEventListener('click', () => {
+        const harga = card.querySelector('.price');
+        const nominalHarga = harga.textContent.match(/\d+/)[0];
+
         let value = parseInt(input.value);
         input.value = value + 1;
-        harga.innerHTML = `$${nominalHargaAwal * input.value}`;
+
+        harga.innerHTML = `$${(nominalHarga / value) * input.value}`
     });
 
     minus.addEventListener('click', () => {
+        const harga = card.querySelector('.price');
+        const nominalHarga = harga.textContent.match(/\d+/)[0];
+
         let value = parseInt(input.value);
-        if (value > 1) {
-            input.value = value - 1;
-        }
-        harga.innerHTML = `$${nominalHargaAwal * input.value}`;
+        if (value > 1) {input.value = value - 1};
+
+        harga.innerHTML = `$${(nominalHarga / value) * input.value}`
     });
 
+    const harga = card.querySelector('.price');
+    const nominalHargaAwal = harga.textContent.match(/\d+/)[0];
+
     input.addEventListener('input', () => {
+
         let value = parseInt(input.value);
         if (isNaN(value) || value < 1) {
             input.value = 1;
-        }
-        harga.innerHTML = `$${nominalHargaAwal * input.value}`;
-    });
+        };
 
-    
-    const inputKodePromo = document.querySelector('#kodepromo');
+        harga.innerHTML = `$${(nominalHargaAwal) * input.value}`
+    });
+});
+
+
+
+const inputKodePromo = document.querySelector('#kodePromo');
+
+inputKodePromo.addEventListener('input', () => {
+
     inputKodePromo.value = inputKodePromo.value.toUpperCase().replace(/\s+/g, '');
 });
 
+
+
 const orderForm = document.querySelector('.order-section form');
-const output = document.querySelector('#output');
+const output = document.querySelector("#output");
+
 
 orderForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -42,55 +60,55 @@ orderForm.addEventListener('submit', (e) => {
     const outputList = document.querySelector("#output ol");
     outputList.innerHTML = '';
 
+   
     let total = 0;
     document.querySelectorAll('.card-produk').forEach(card => {
-        const judul = card.querySelector('h2').textContent;
-        const qty = parseInt(card.querySelector('.quantity input').value);
-        const harga = parseInt(card.querySelector('.price').textContent.match(/\d+/)[0]);
-        const li = document.createElement('li');
+        const judul = card.querySelector('h3').textContent;
+        const qty = card.querySelector('.quantity input').value;
+        const harga = card.querySelector('.price').textContent.match(/\d+/)[0];
+        
 
-        li.innerHTML = `<p><span id="judulProduk">${judul}</span> - <span id="subtotalHarga">$${harga}</span></p>`;
+        const li = document.createElement('li')
+        li.innerHTML = `<p><span id="judulProduk">${judul}</span><span id="subtotalHarga">$${harga}</span><p>`
         outputList.appendChild(li);
 
-        total += harga;
+    
+        total += parseInt(harga);
     });
 
+    
     const totalHargaAwal = document.querySelector('#totalHargaAwal');
     const totalHargaAkhir = document.querySelector('#totalHargaAkhir');
 
     totalHargaAwal.style.color = 'black';
-    totalHargaAkhir.style.color = 'none';
+    totalHargaAwal.style.textDecoration = 'none';
     totalHargaAkhir.style.display = 'none';
+
     totalHargaAwal.innerHTML = `$${total}`;
 
-    const kodepromo = document.querySelector('#kodepromo').value.toUpperCase();
+    const kodePromo = document.querySelector('#kodePromo').value;
+    
+    if(kodePromo) {
+        totalHargaAkhir.style.display = 'block';
+        totalHargaAwal.style.color = 'gray';
+        totalHargaAwal.style.textDecoration = 'line-through';
 
-    if (kodepromo) {
         let diskon = 0;
-
-        if (kodepromo === 'DISKON50') {
-            diskon = 0.5;
-        } else if (kodepromo === 'DISKON20') {
-            diskon = 0.0;
-        }
-
-        if (diskon > 0) {
-            totalHargaAkhir.style.display = 'block';
-            totalHargaAkhir.style.color = 'red';
-            totalHargaAwal.style.color = 'gray';
-            totalHargaAwal.style.textDecoration = 'line-through';
-            totalHargaAkhir.innerHTML = `$${(total * (1 - diskon)).toFixed(2)}`;
-        } else {
-            totalHargaAkhir.style.display = 'none';
+        if(kodePromo === 'DISKON50'){diskon = 0.5}
+        else if(kodePromo === 'DISKON20'){diskon = 0.0}
+        else {
             totalHargaAwal.style.color = 'black';
             totalHargaAwal.style.textDecoration = 'none';
-        }
-    }
-});
+            totalHargaAkhir.style.display = 'none';
+        };
 
+        totalHargaAkhir.innerHTML = `$${total*(1-diskon)}`;
+    };
+});
 
 $('#reset').click(() => {
     $('#output').css('display', 'none');
+
     $('.card-produk input').each((_, quantity) => {
         $(quantity).val(1);
     });

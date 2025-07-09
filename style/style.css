@@ -204,9 +204,14 @@ body{
   
   .total-harga p:first-child {
     flex: 6;
-    color: gray;
+    font-weight: bold;
   }
   
+
+  .total-harga #totalHargaAwal {
+    text-decoration: line-through;
+    color: gray;
+  }
   .total-harga #totalHargaAwal,
   .total-harga #totalHargaAkhir {
     flex: 1;
