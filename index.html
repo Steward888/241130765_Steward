@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./style//style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style/style.css">
+    <title>tokopaedi.</title>
+  </head>
+  <body>
+</head>
+<body>
+  <header>
+    <h1>tokopaedi.</h1>
+  </header>
+  <main>
+    <section class="produk-section">
+      <div class="card-produk">
+        <div class="produk-utama">
+          <img src="/images/produk1.jpg" alt="produk1" />
+          <h2>Denmark Backpack</h2>
+          <p>one size</p>
+          <p>cream</p>
+          <div class="quantity">
+            <button class="minus">-</button>
+            <input type="number" value="1" min="1" />
+            <button class="plus">+</button>
+          </div>
+          <p class="price">$60</p>
+        </div>
+      </div>
+
+      <div class="card-produk">
+        <div class="produk-utama">
+          <img src="./images/produk2.jpeg" alt="produk2" />
+          <h2>Casual Backpack</h2>
+          <p>One size</p>
+          <p>black</p>
+          <div class="quantity">
+            <button class="minus">-</button>
+            <input type="number" value="1" min="1" />
+            <button class="plus">+</button>
+          </div>
+          <p class="price">$85</p>
+        </div>
+      </div>
+
+      <div class="card-produk">
+        <div class="produk-utama">
+          <img src="./images/produk3.png" alt="produk3" />
+          <h2>Men Backpack</h2>
+          <p>One size</p>
+          <p>Grey</p>
+          <div class="quantity">
+            <button class="minus">-</button>
+            <input type="number" value="1" min="1" />
+            <button class="plus">+</button>
+          </div>
+          <p class="price">$150</p>
+        </div>
+      </div>
+
+      <div class="card-produk">
+        <div class="produk-utama">
+          <img src="./images/produk4.jpg" alt="" />
+          <h2>Women Backpack</h2>
+          <p>One size</p>
+          <p>Pink</p>
+          <div class="quantity">
+            <button class="minus">-</button>
+            <input type="number" value="1" min="1" />
+            <button class="plus">+</button>
+          </div>
+          <p class="price">$60</p>
+        </div>
+      </div>
+    </section>
+    <section class="order-section">
+      <h2>Order Summary</h2>
+      <form>
+        <input type="text" id="name" placeholder="name" required />
+        <input type="email" id="email" placeholder="Email" required />
+        <input type="text" id="Promo Code" placeholder="Promo Code" />
+        <button type="reset" id="reset">Reset</button>
+        <button type="submit" id="apply">Apply</button>
+      </form>
+      <div id="output">
+        <ol></ol>
+        <div class="total-harga">
+          <p>Total Harga:</p>
+          <p id="totalHargaAwal">$100</p>
+          <p id="totalHargaAkhir">$60</p>
+        </div>
+      </div>
+    </section>
+  </body>
+  <script src="./script/jquery-3.7.1.min.js"></script>
+  <script src="./script/script.js"></script>
+</html>
